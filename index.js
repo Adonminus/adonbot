@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
-const command = require('./commands/command')
+const command = require('./command')
 const secrets = require('./secrets')
 
 client.on('message', (msg) => {

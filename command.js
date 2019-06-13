@@ -1,4 +1,5 @@
-const classes = require('./classes')
+const fs = require('fs')
+var classes = {}
 
 module.exports = function command(name, args, msg) {
   if (name in classes)
@@ -6,6 +7,14 @@ module.exports = function command(name, args, msg) {
   else  
     help(name, args, msg)
 }
+
+fs.readdir("./commands/", (err, files) => {
+    if (err) return
+    files.forEach(file => {
+        if (!file.endsWith(".js")) return;
+         classes[file.split(".")[0]] = require(`./commands/${file}`)
+    })
+})
 
 function help(name, args, msg) {
   if(args[0] in classes && name === 'help')
